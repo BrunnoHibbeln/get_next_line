@@ -68,6 +68,8 @@ static char	*read_and_stash(int fd, char *stash)
 	char	*buffer;
 	int		bytes_read;
 
+	if (!stash)
+		stash = ft_strdup("");
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);

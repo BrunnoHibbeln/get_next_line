@@ -16,7 +16,7 @@
 
 int	main(void)
 {
-	int		fd = open("get_next_line.h", O_RDONLY);
+	int		fd = open("get_next_line.c", O_RDONLY);
 	char	*line;
 
 	while ((line = get_next_line(fd)))
