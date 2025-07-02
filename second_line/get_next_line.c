@@ -6,7 +6,7 @@
 /*   By: bhibbeln <bhibbeln@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:39:44 by bhibbeln          #+#    #+#             */
-/*   Updated: 2025/05/27 16:39:44 by bhibbeln         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:58:16 by bhibbeln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char	*save_remainder(char *stash)
 static char	*read_and_stash(int fd, char *stash)
 {
 	char	*buffer;
+	char	*temp;
 	int		bytes_read;
 
 	if (!stash)
@@ -79,12 +80,13 @@ static char	*read_and_stash(int fd, char *stash)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
-			free(buffer);
-			free(stash);
+			ft_clean(buffer, stash);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
+		temp = stash;
 		stash = ft_strjoin(stash, buffer);
+		free(temp);
 	}
 	free(buffer);
 	return (stash);
@@ -104,3 +106,20 @@ char	*get_next_line(int fd)
 	stash = save_remainder(stash);
 	return (line);
 }
+/* 
+#include <fcntl.h>
+#include <stdio.h>
+
+int	main()
+{
+	int		fd;
+	char	*line;
+
+	fd = open("test.txt", O_RDONLY);
+	while ((line = get_next_line(fd)))
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+} */

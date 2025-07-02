@@ -6,7 +6,7 @@
 /*   By: bhibbeln <bhibbeln@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:39:15 by bhibbeln          #+#    #+#             */
-/*   Updated: 2025/05/27 16:39:15 by bhibbeln         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:40:38 by bhibbeln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,6 @@ char	*ft_strchr(const char *s, int c)
 	if (c == '\0')
 		return ((char *)s);
 	return (first);
-}
-
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	char	*p;
-	int		i;
-	int		j;
-	size_t	len1;
-	size_t	len2;
-	
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	i = 0;
-	j = 0;
-	p = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!p)
-		return (NULL);
-	while (s1[i])
-	{
-		p[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-		p[i++] = s2[j++];
-	p[i] = '\0';
-	return (p);
 }
 
 char	*ft_strjoin(const char *s1, const char *s2)
@@ -107,4 +81,10 @@ char	*ft_strdup(const char *s)
 	}
 	s_copy[i] = '\0';
 	return (s_copy);
+}
+
+void	ft_clean(char *buffer, char *stash)
+{
+	free(buffer);
+	free(stash);
 }
